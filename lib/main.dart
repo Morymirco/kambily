@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screen/home_page.dart';
+
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF048B9A),
         ),
+        fontFamily: 'Krub',
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Kambily'),
+      home: const MainScreen(),
     );
   }
 }

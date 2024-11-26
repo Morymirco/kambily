@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -273,9 +274,14 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 children: [
-                  Icon(Icons.shopping_bag_outlined, 
-                    color: primaryColor,
-                    size: 40,
+                  SvgPicture.asset(
+                    'assets/shopping-bag-svgrepo-com.svg',
+                    width: 40,
+                    height: 40,
+                    colorFilter: ColorFilter.mode(
+                      primaryColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   const SizedBox(width: 20),
                   Expanded(
@@ -447,40 +453,78 @@ class _MyHomePageState extends State<MyHomePage> {
                     onFavorite: () {},
                     onView: () {},
                   ),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFF5F5),
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.grey[700]!,
+                        width: 1,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '100%',
+                          style: TextStyle(
+                            fontSize: 62,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF555555),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Livraison gratuite à 100% pour tout achats à',
+                          style: TextStyle(
+                            fontSize: 14,
+                            // fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                          ),
+                        )
+                      
+                        ,
+                        const SizedBox(height: 5),
+                        Text(
+                          'partir de 350.000 GNF',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Plus vous achetez, plus vous économisez!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          'GRATUIT',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF555555),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
           ],
         ),
-      ),
-      
-      // Barre de navigation du bas
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled, size: 28),
-            label: 'ACCUEIL',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined, size: 28),
-            label: 'BOUTIQUE',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category, size: 28),
-            label: 'CATÉGORIES',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.headset_mic, size: 28),
-            label: 'CONTACT',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_pin, size: 28),
-            label: 'COMPTE',
-          ),
-        ],
-        selectedItemColor: primaryColor,
-        iconSize: 28,
       ),
     );
   }
@@ -930,3 +974,4 @@ class ProductCardWide extends StatelessWidget {
     );
   }
 }
+
