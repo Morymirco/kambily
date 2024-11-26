@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final bool isFromOnboarding;
+  
+  const SplashScreen({
+    super.key,
+    this.isFromOnboarding = false,
+  });
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -13,18 +18,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToOnboarding();
+    _navigate();
   }
 
-  _navigateToOnboarding() async {
+  _navigate() async {
     await Future.delayed(const Duration(seconds: 3));
     if (!mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const OnboardingScreen(),
-      ),
-    );
+    
+    const bool isFirstTime = true;
+
+    if (isFirstTime) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const OnboardingScreen(),
+        ),
+      );
+    } 
   }
 
   @override

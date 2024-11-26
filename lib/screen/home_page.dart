@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../screens/about_screen.dart';
+import '../screens/main_screen.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -50,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: IconButton(
-                              icon: Icon(Icons.close, color: primaryColor),
+                              icon: const Icon(Icons.close, color: primaryColor),
                               onPressed: () => Navigator.pop(context),
                             ),
                           ),
@@ -68,39 +71,79 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home_outlined, color: primaryColor),
+                  leading: const Icon(Icons.home_outlined, color: primaryColor),
                   title: const Text('Accueil'),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ExpansionTile(
-                  leading: Icon(Icons.category_outlined, color: primaryColor),
+                  leading: const Icon(Icons.category_outlined, color: primaryColor),
                   title: const Text('Nos catégories'),
                   iconColor: primaryColor,
                   children: [
-                    // Ajoutez vos sous-catégories ici
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 50.0),
+                      title: const Text('Vêtements'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 50.0), 
+                      title: const Text('Chaussures'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 50.0),
+                      title: const Text('Accessoires'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 50.0),
+                      title: const Text('Sacs'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 50.0),
+                      title: const Text('Bijoux'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    )
                   ],
                 ),
                 ListTile(
-                  leading: Icon(Icons.shopping_bag_outlined, color: primaryColor),
+                  leading: const Icon(Icons.shopping_bag_outlined, color: primaryColor),
                   title: const Text('Boutique'),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.headset_mic_outlined, color: primaryColor),
+                  leading: const Icon(Icons.headset_mic_outlined, color: primaryColor),
                   title: const Text('Contact'),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outline, color: primaryColor),
+                  leading: const Icon(Icons.info_outline, color: primaryColor),
                   title: const Text('À propos de nous'),
                   onTap: () {
                     Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutScreen(),
+                      ),
+                    );
                   },
                 ),
                 const Divider(),
@@ -125,18 +168,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   leading: Icon(Icons.phone_outlined, color: primaryColor),
-                  title: const Text('624-22-85-55'),
-                  subtitle: const Text(
+                  title: Text('624-22-85-55'),
+                  subtitle: Text(
                     'Vous pouvez appeler à tout moment de 8 h à 20 h.',
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   leading: Icon(Icons.email_outlined, color: primaryColor),
-                  title: const Text('contact@kambily.com'),
-                  subtitle: const Text(
+                  title: Text('contact@kambily.com'),
+                  subtitle: Text(
                     "L'e-mail que vous enverrez sera répondu dans les plus brefs délais.",
                     style: TextStyle(fontSize: 12),
                   ),
@@ -278,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     'assets/shopping-bag-svgrepo-com.svg',
                     width: 40,
                     height: 40,
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                       primaryColor,
                       BlendMode.srcIn,
                     ),
@@ -348,14 +391,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(
                         Icons.local_shipping_outlined,
                         color: primaryColor,
                         size: 24,
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Text(
                         'Livraison Gratuite',
                         style: TextStyle(
@@ -368,10 +411,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Action Voir Plus
+                      if (context.mounted) {
+                        final mainScreenState = context.findAncestorStateOfType<MainScreenState>();
+                        if (mainScreenState != null) {
+                          mainScreenState.setState(() {
+                            mainScreenState.selectedIndex = 1;
+                          });
+                        }
+                      }
                     },
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Text(
                           'Voir Plus',
                           style: TextStyle(
@@ -469,16 +519,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           '100%',
                           style: TextStyle(
                             fontSize: 62,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFF555555),
+                            color: Color(0xFF555555),
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Text(
+                        const Text(
                           'Livraison gratuite à 100% pour tout achats à',
                           style: TextStyle(
                             fontSize: 14,
@@ -489,7 +539,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       
                         ,
                         const SizedBox(height: 5),
-                        Text(
+                        const Text(
                           'partir de 350.000 GNF',
                           style: TextStyle(
                             fontSize: 18,
@@ -591,7 +641,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: IconButton(
-                        icon: Icon(Icons.close, color: primaryColor),
+                        icon: const Icon(Icons.close, color: primaryColor),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
@@ -665,14 +715,14 @@ class ProductCard extends StatelessWidget {
   final bool showAddToCart;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.price,
     required this.onFavorite,
     required this.onView,
     this.showAddToCart = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -711,7 +761,7 @@ class ProductCard extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.favorite_border),
                         onPressed: onFavorite,
-                        color:Color(0xFF048b9a),
+                        color:const Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -727,7 +777,7 @@ class ProductCard extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.remove_red_eye_outlined),
                         onPressed: onView,
-                        color: Color(0xFF048b9a),
+                        color: const Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -772,7 +822,7 @@ class ProductCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: Color(0xFF048b9a).withOpacity(0.1),
+                        color: const Color(0xFF048b9a).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Text(
@@ -792,7 +842,7 @@ class ProductCard extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF048b9a),
+                        backgroundColor: const Color(0xFF048b9a),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -826,13 +876,13 @@ class ProductCardWide extends StatelessWidget {
   final VoidCallback onView;
 
   const ProductCardWide({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.price,
     required this.onFavorite,
     required this.onView,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -871,7 +921,7 @@ class ProductCardWide extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.favorite_border),
                         onPressed: onFavorite,
-                        color: Color(0xFF048b9a),
+                        color: const Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -887,7 +937,7 @@ class ProductCardWide extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.remove_red_eye_outlined),
                         onPressed: onView,
-                        color: Color(0xFF048b9a),
+                        color: const Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -932,7 +982,7 @@ class ProductCardWide extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Color(0xFF048b9a).withOpacity(0.1),
+                        color: const Color(0xFF048b9a).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Text(
@@ -951,7 +1001,7 @@ class ProductCardWide extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF048b9a),
+                      backgroundColor: const Color(0xFF048b9a),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

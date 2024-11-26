@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kambily/screens/main_screen.dart';
+import 'package:kambily/screens/auth_screen.dart';
 
 
 class OnboardingScreen extends StatefulWidget {
@@ -145,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MainScreen(),
+                          builder: (context) => const AuthScreen(),
                         ),
                       );
                     } else {
