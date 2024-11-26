@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +11,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const Color primaryColor = Color(0xFF048B9A);
+
   final List<String> carouselImages = [
     'assets/Just-stay-at-home.png',
     'assets/3.png',
@@ -23,14 +24,147 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            'assets/logo.webp',
+                            height: 70,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: primaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.close, color: primaryColor),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'MAIN MENU',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home_outlined, color: primaryColor),
+                  title: const Text('Accueil'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ExpansionTile(
+                  leading: Icon(Icons.category_outlined, color: primaryColor),
+                  title: const Text('Nos catégories'),
+                  iconColor: primaryColor,
+                  children: [
+                    // Ajoutez vos sous-catégories ici
+                  ],
+                ),
+                ListTile(
+                  leading: Icon(Icons.shopping_bag_outlined, color: primaryColor),
+                  title: const Text('Boutique'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.headset_mic_outlined, color: primaryColor),
+                  title: const Text('Contact'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.info_outline, color: primaryColor),
+                  title: const Text('À propos de nous'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'CATEGORY MENU',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'COORDONNÉES',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.phone_outlined, color: primaryColor),
+                  title: const Text('624-22-85-55'),
+                  subtitle: const Text(
+                    'Vous pouvez appeler à tout moment de 8 h à 20 h.',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.email_outlined, color: primaryColor),
+                  title: const Text('contact@kambily.com'),
+                  subtitle: const Text(
+                    "L'e-mail que vous enverrez sera répondu dans les plus brefs délais.",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Copyright 2024 © Kambily Sarl. Tous droits réservés.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        // elevation: 4,
-        // shadowColor: Colors.grey.withOpacity(0.3),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.black),
-          onPressed: () {
-            // Action du menu hamburger
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu, color: Colors.black),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
           },
         ),
         centerTitle: true,
@@ -43,12 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: Alignment.center,
             children: [
               IconButton(
-                icon: const Icon(Icons.shopping_cart_outlined, 
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  // Action du panier
-                },
+                icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+                onPressed: () => _showCartModal(context),
               ),
               Positioned(
                 top: 8,
@@ -56,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: const BoxDecoration(
-                    color: Colors.teal,
+                    color: primaryColor,
                     shape: BoxShape.circle,
                   ),
                   constraints: const BoxConstraints(
@@ -127,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         margin: const EdgeInsets.symmetric(horizontal: 4.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.teal.withOpacity(
+                          color: primaryColor.withOpacity(
                             _currentCarouselIndex == entry.key ? 0.9 : 0.4,
                           ),
                         ),
@@ -144,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 children: [
                   Icon(Icons.shopping_bag_outlined, 
-                    color: Colors.teal,
+                    color: primaryColor,
                     size: 40,
                   ),
                   const SizedBox(width: 20),
@@ -180,7 +310,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     decoration: BoxDecoration(
-                      color: Colors.teal,
+                      color: primaryColor,
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: const Text(
@@ -216,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Icon(
                         Icons.local_shipping_outlined,
-                        color: Colors.teal,
+                        color: primaryColor,
                         size: 24,
                       ),
                       const SizedBox(width: 10),
@@ -225,7 +355,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.teal,
+                          color: primaryColor,
                         ),
                       ),
                     ],
@@ -239,11 +369,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text(
                           'Voir Plus',
                           style: TextStyle(
-                            color: Colors.teal,
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(Icons.arrow_forward, color: Colors.teal),
+                        Icon(Icons.arrow_forward, color: primaryColor),
                       ],
                     ),
                   ),
@@ -349,9 +479,135 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'COMPTE',
           ),
         ],
-        selectedItemColor: Colors.teal,
+        selectedItemColor: primaryColor,
         iconSize: 28,
       ),
+    );
+  }
+
+  void _showCartModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: Column(
+            children: [
+              // En-tête du modal
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 0.5,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/logo.webp',
+                          height: 40,
+                        ),
+                        const SizedBox(width: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF048B9A),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Text(
+                            '0',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: primaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: IconButton(
+                        icon: Icon(Icons.close, color: primaryColor),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Contenu du panier vide
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 60,
+                        color: Colors.grey[400],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'No products in the cart.',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Bouton en bas
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF048B9A),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Continuer les achats',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -411,7 +667,7 @@ class ProductCard extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.favorite_border),
                         onPressed: onFavorite,
-                        color: Colors.teal,
+                        color:Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -427,7 +683,7 @@ class ProductCard extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.remove_red_eye_outlined),
                         onPressed: onView,
-                        color: Colors.teal,
+                        color: Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -456,7 +712,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   price,
                   style: const TextStyle(
-                    color: Colors.teal,
+                    color: Color(0xFF048b9a),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -465,20 +721,20 @@ class ProductCard extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.inventory_2_outlined,
-                      color: Colors.teal,
+                      color: Color(0xFF048b9a),
                       size: 16,
                     ),
                     const SizedBox(width: 4),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: Colors.teal.withOpacity(0.1),
+                        color: Color(0xFF048b9a).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Text(
                         'In Stock',
                         style: TextStyle(
-                          color: Colors.teal,
+                          color: Color(0xFF048b9a),
                           fontSize: 11,
                         ),
                       ),
@@ -492,7 +748,7 @@ class ProductCard extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal,
+                        backgroundColor: Color(0xFF048b9a),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -571,7 +827,7 @@ class ProductCardWide extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.favorite_border),
                         onPressed: onFavorite,
-                        color: Colors.teal,
+                        color: Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -587,7 +843,7 @@ class ProductCardWide extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.remove_red_eye_outlined),
                         onPressed: onView,
-                        color: Colors.teal,
+                        color: Color(0xFF048b9a),
                         padding: const EdgeInsets.all(8),
                         constraints: const BoxConstraints(),
                         iconSize: 20,
@@ -615,7 +871,7 @@ class ProductCardWide extends StatelessWidget {
                 Text(
                   price,
                   style: const TextStyle(
-                    color: Colors.teal,
+                    color: Color(0xFF048b9a),
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -625,20 +881,20 @@ class ProductCardWide extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.inventory_2_outlined,
-                      color: Colors.teal,
+                      color: Color(0xFF048b9a),
                       size: 18,
                     ),
                     const SizedBox(width: 6),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.teal.withOpacity(0.1),
+                        color: Color(0xFF048b9a).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Text(
                         'In Stock',
                         style: TextStyle(
-                          color: Colors.teal,
+                          color: Color(0xFF048b9a),
                           fontSize: 12,
                         ),
                       ),
@@ -651,7 +907,7 @@ class ProductCardWide extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Color(0xFF048b9a),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
