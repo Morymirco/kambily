@@ -48,7 +48,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           width: 2,
                         ),
                         image: const DecorationImage(
-                          image: AssetImage('assets/profile.png'),
+                          image: AssetImage('assets/profil.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -81,6 +81,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF048B9A)),
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Color(0xFF048B9A),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -90,6 +104,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   prefixIcon: const Icon(Icons.email_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF048B9A)),
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Color(0xFF048B9A),
                   ),
                 ),
               ),
@@ -101,6 +129,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF048B9A)),
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Color(0xFF048B9A),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -110,6 +152,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   prefixIcon: const Icon(Icons.calendar_today_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF048B9A)),
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Color(0xFF048B9A),
                   ),
                 ),
               ),

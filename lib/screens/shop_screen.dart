@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kambily/screens/cart_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../screen/home_page.dart';  // Pour utiliser ProductCard
+  // Pour utiliser CartScreen
+  
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});
@@ -675,8 +678,13 @@ class _ShopScreenState extends State<ShopScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Action d'ajout au panier
-                            Navigator.pop(context);
+                            Navigator.pop(context); // Ferme le popup
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CartScreen(),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF048B9A),
@@ -694,7 +702,7 @@ class _ShopScreenState extends State<ShopScreen> {
                               ),
                               SizedBox(width: 8),
                               Text(
-                                'Ajouter au panier',
+                                'Voir le panier',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

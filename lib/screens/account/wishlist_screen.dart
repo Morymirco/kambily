@@ -42,12 +42,21 @@ class WishlistScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: 5, // Nombre d'articles dans la liste de souhaits
+        itemCount: 5,
         itemBuilder: (context, index) {
-          return Card(
+          return Container(
             margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(
+            decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey[200]!),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[100]!,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -122,28 +131,48 @@ class WishlistScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             // Boutons d'action
-                            IconButton(
-                              icon: const Icon(
-                                Icons.shopping_cart_outlined,
-                                color: Color(0xFF048B9A),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF048B9A).withOpacity(0.1),
+                                shape: BoxShape.circle,
                               ),
-                              onPressed: () {
-                                // Ajouter au panier
-                              },
-                              constraints: const BoxConstraints(),
-                              padding: EdgeInsets.zero,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: Color(0xFF048B9A),
+                                  size: 20,
+                                ),
+                                onPressed: () {
+                                  // Ajouter au panier
+                                },
+                                constraints: const BoxConstraints(
+                                  minWidth: 35,
+                                  minHeight: 35,
+                                ),
+                                padding: EdgeInsets.zero,
+                              ),
                             ),
                             const SizedBox(width: 8),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.delete_outline,
-                                color: Colors.red,
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.1),
+                                shape: BoxShape.circle,
                               ),
-                              onPressed: () {
-                                // Supprimer de la liste
-                              },
-                              constraints: const BoxConstraints(),
-                              padding: EdgeInsets.zero,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.red,
+                                  size: 20,
+                                ),
+                                onPressed: () {
+                                  // Supprimer de la liste
+                                },
+                                constraints: const BoxConstraints(
+                                  minWidth: 35,
+                                  minHeight: 35,
+                                ),
+                                padding: EdgeInsets.zero,
+                              ),
                             ),
                           ],
                         ),

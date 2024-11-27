@@ -25,10 +25,19 @@ class OrderHistoryScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         itemCount: 5,
         itemBuilder: (context, index) {
-          return Card(
+          return Container(
             margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(
+            decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey[200]!),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[100]!,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -47,116 +56,100 @@ class OrderHistoryScreen extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
+                          horizontal: 12,
+                          vertical: 6,
                         ),
                         decoration: BoxDecoration(
                           color: _getStatusColor(index).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           _getStatusText(index),
                           style: TextStyle(
                             color: _getStatusColor(index),
                             fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_today_outlined,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '23 Mars 2024',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.shopping_bag_outlined,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '3 articles',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.payments_outlined,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '250,000 GNF',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      children: [
+                        _buildInfoRow(
+                          Icons.calendar_today_outlined,
+                          '23 Mars 2024',
+                          'Date de commande',
+                        ),
+                        const Divider(height: 16),
+                        _buildInfoRow(
+                          Icons.shopping_bag_outlined,
+                          '3 articles',
+                          'Quantité',
+                        ),
+                        const Divider(height: 16),
+                        _buildInfoRow(
+                          Icons.payments_outlined,
+                          '250,000 GNF',
+                          'Montant total',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
-                        child: OutlinedButton(
+                        child: OutlinedButton.icon(
                           onPressed: () {
                             // Voir les détails
                           },
+                          icon: const Icon(
+                            Icons.visibility_outlined,
+                            size: 18,
+                          ),
+                          label: const Text('Voir les détails',style: TextStyle(fontSize: 12),),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF048B9A),
                             side: const BorderSide(color: Color(0xFF048B9A)),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text('Voir les détails'),
                         ),
                       ),
-                      if (_getStatusText(index) == 'Livré')
+                      if (_getStatusText(index) == 'Livré') ...[
                         const SizedBox(width: 12),
-                      if (_getStatusText(index) == 'Livré')
                         Expanded(
-                          child: ElevatedButton(
+                          child: ElevatedButton.icon(
                             onPressed: () {
                               // Commander à nouveau
                             },
+                            icon: const Icon(
+                              Icons.refresh,
+                              size: 18,
+                            ),
+                            label: const Text('Commander à nouveau',style: TextStyle(fontSize: 10),),
                             style: ElevatedButton.styleFrom(
+
                               backgroundColor: const Color(0xFF048B9A),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text(
-                              'Commander à nouveau',
-                              style: TextStyle(color: Colors.white),
-                            ),
                           ),
                         ),
+                      ],
                     ],
                   ),
                 ],
@@ -165,6 +158,45 @@ class OrderHistoryScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildInfoRow(IconData icon, String value, String label) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: const Color(0xFF048B9A).withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(
+            icon,
+            color: const Color(0xFF048B9A),
+            size: 20,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
