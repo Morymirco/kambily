@@ -86,11 +86,19 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             ),
             markers: _markers,
             onMapCreated: (controller) {
-              _mapController = controller;
+              setState(() {
+                _mapController = controller;
+              });
             },
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             zoomControlsEnabled: false,
+            mapType: MapType.normal,
+            compassEnabled: true,
+            zoomGesturesEnabled: true,
+            rotateGesturesEnabled: true,
+            scrollGesturesEnabled: true,
+            tiltGesturesEnabled: true,
           ),
 
           // Liste des adresses

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kambily/screens/account/delivery_address_screen.dart';
+import 'package:kambily/screens/order_confirmation_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -461,108 +462,6 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Code promo
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[50],
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey[200]!),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF048B9A).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: const Icon(
-                                Icons.discount_outlined,
-                                color: Color(0xFF048B9A),
-                                size: 20,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            const Text(
-                              'Code promo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Entrer votre code promo',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey[400],
-                                    fontSize: 14,
-                                  ),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 12,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(color: Colors.grey[300]!),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(color: Colors.grey[300]!),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(color: Color(0xFF048B9A)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Action appliquer code promo
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF048B9A),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              child: const Text(
-                                'Appliquer',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Le code promo sera appliqué sur le montant total',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
                   // Résumé du panier
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -626,7 +525,12 @@ class CartScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Action commander
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OrderConfirmationScreen(),
+                        ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF048B9A),

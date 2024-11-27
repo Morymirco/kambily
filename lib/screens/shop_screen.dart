@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kambily/screens/cart_screen.dart';
+import 'package:kambily/screens/product_details_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../screen/home_page.dart';  // Pour utiliser ProductCard
@@ -682,7 +683,11 @@ class _ShopScreenState extends State<ShopScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CartScreen(),
+                                builder: (context) => ProductDetailsScreen(
+                                  title: title,
+                                  image: image,
+                                  price: price,
+                                ),
                               ),
                             );
                           },
@@ -783,7 +788,12 @@ class _ShopScreenState extends State<ShopScreen> {
                 IconButton(
                   icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
                   onPressed: () {
-                    // Action du panier
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CartScreen(),
+                      ),
+                    );
                   },
                 ),
                 Positioned(

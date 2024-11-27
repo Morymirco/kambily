@@ -81,21 +81,31 @@ class AccountScreen extends StatelessWidget {
               const SizedBox(height: 30),
 
               // Section Commandes
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Mes Commandes',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    'Voir tout',
-                    style: TextStyle(
-                      color: Color(0xFF048B9A),
-                      fontWeight: FontWeight.w500,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OrderHistoryScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Voir tout',
+                      style: TextStyle(
+                        color: Color(0xFF048B9A),
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -104,10 +114,46 @@ class AccountScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildOrderStatus(Icons.payment, 'En attente'),
-                  _buildOrderStatus(Icons.local_shipping_outlined, 'En cours'),
-                  _buildOrderStatus(Icons.inventory_2_outlined, 'Livrée'),
-                  _buildOrderStatus(Icons.star_outline, 'À évaluer'),
+                  _buildOrderStatus(
+                    Icons.payment, 
+                    'En attente',
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderHistoryScreen(),
+                      ),
+                    ),
+                  ),
+                  _buildOrderStatus(
+                    Icons.local_shipping_outlined, 
+                    'En cours',
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderHistoryScreen(),
+                      ),
+                    ),
+                  ),
+                  _buildOrderStatus(
+                    Icons.inventory_2_outlined, 
+                    'Livrée',
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderHistoryScreen(),
+                      ),
+                    ),
+                  ),
+                  _buildOrderStatus(
+                    Icons.star_outline, 
+                    'À évaluer',
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderHistoryScreen(),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 30),
@@ -283,30 +329,33 @@ class AccountScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOrderStatus(IconData icon, String text) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: const Color(0xFF048B9A).withOpacity(0.1),
-            shape: BoxShape.circle,
+  Widget _buildOrderStatus(IconData icon, String text, {required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF048B9A).withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: const Color(0xFF048B9A),
+              size: 24,
+            ),
           ),
-          child: Icon(
-            icon,
-            color: const Color(0xFF048B9A),
-            size: 24,
+          const SizedBox(height: 8),
+          Text(
+            text,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          text,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

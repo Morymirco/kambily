@@ -76,6 +76,7 @@ flutter:
     - assets/icons/instagram.svg
     - assets/icons/tiktok.svg
     - assets/icons/whatsapp.svg
+
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

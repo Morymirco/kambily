@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kambily/screens/contact_screen.dart';
+import 'package:kambily/screens/shop_screen.dart';
 
 import '../screens/about_screen.dart';
 import '../screens/main_screen.dart';
@@ -123,14 +125,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   leading: const Icon(Icons.shopping_bag_outlined, color: primaryColor),
                   title: const Text('Boutique'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShopScreen(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(
                   leading: const Icon(Icons.headset_mic_outlined, color: primaryColor),
                   title: const Text('Contact'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ContactScreen(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(
