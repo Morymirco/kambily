@@ -27,6 +27,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _currentCarouselIndex = 0;
 
+  Map<int, int> _quantities = {
+    0: 1,
+    1: 1,
+    2: 1,
+    3: 1,
+    4: 1
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -716,6 +724,20 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
+  void _updateQuantity(int index, bool increment) {
+    setState(() {
+      if (!_quantities.containsKey(index)) {
+        _quantities[index] = 1;
+      }
+      
+      if (increment) {
+        _quantities[index] = (_quantities[index]! + 1);
+      } else if (_quantities[index]! > 1) {
+        _quantities[index] = (_quantities[index]! - 1);
+      }
+    });
+  }
 }
 
 class ProductCard extends StatelessWidget {
@@ -974,38 +996,79 @@ class ProductCardWide extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  price,
-                  style: const TextStyle(
-                    color: Color(0xFF048b9a),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(
-                      Icons.inventory_2_outlined,
-                      color: Color(0xFF048b9a),
-                      size: 18,
-                    ),
-                    const SizedBox(width: 6),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF048b9a).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(4),
+                    // Prix actuel
+                    const Text(
+                      '65,000 GNF',
+                      style: TextStyle(
+                        color: Color(0xFF048B9A),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
-                      child: const Text(
+                    ),
+                    const SizedBox(width: 8),
+                    // Prix barré et réduction
+                    Row(
+                      children: [
+                        Text(
+                          '85,000 GNF',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.red[50],
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '-30%',
+                            style: TextStyle(
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                // Badge In Stock
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF048B9A).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.inventory_2_outlined,
+                        size: 14,
+                        color: Color(0xFF048B9A),
+                      ),
+                      SizedBox(width: 4),
+                      Text(
                         'In Stock',
                         style: TextStyle(
-                          color: Color(0xFF048b9a),
+                          color: Color(0xFF048B9A),
                           fontSize: 12,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 12),
                 SizedBox(

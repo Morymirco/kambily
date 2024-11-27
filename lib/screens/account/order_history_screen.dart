@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'order_details_screen.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
   const OrderHistoryScreen({super.key});
@@ -109,13 +110,22 @@ class OrderHistoryScreen extends StatelessWidget {
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: () {
-                            // Voir les détails
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrderDetailsScreen(
+                                  orderId: '${1234 + index}',
+                                  status: _getStatusText(index),
+                                  statusColor: _getStatusColor(index),
+                                ),
+                              ),
+                            );
                           },
                           icon: const Icon(
                             Icons.visibility_outlined,
                             size: 18,
                           ),
-                          label: const Text('Voir les détails',style: TextStyle(fontSize: 12),),
+                          label: const Text('Voir les détails'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF048B9A),
                             side: const BorderSide(color: Color(0xFF048B9A)),
